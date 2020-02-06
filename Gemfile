@@ -4,5 +4,6 @@ ruby "2.6.5"
 gemspec
 
 gem "factory_bot", "~> 5.1"
+gem "guard"
 gem "rake", "~> 12.0"
 gem "rspec", "~> 3.0"
