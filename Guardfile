@@ -1,16 +1,28 @@
 # guard
 
-ignore(/.idea/)
+ignore(/.bundle/)
+ignore(/.config/)
+ignore(/.gem/)
 ignore(/.git/)
+ignore(/.guard_history/)
+ignore(/.idea/)
+ignore(/.local/)
+ignore(/.node-gyp/)
 ignore(/.rspec_status/)
 ignore(/Gemfile.lock/)
 ignore(/node_modules/)
 
-watch(/.*/) do |files|
-  puts "\n" + '=' * 80 + "\n"
-  file = files[0]
-  puts "file:#{file}"
-  system "rubocop --auto-correct #{file}"
-  puts "\n" + '-' * 80 + "\n"
-  system 'rspec'
+def print_line(character)
+  puts "\n" + character * 80 + "\n"
+end
+
+watch(/.*\.rb/) do |match|
+  system("clear")
+  print_line("=")
+  path = match[0]
+  puts "Processing file: #{path}..."
+  system "rubocop --auto-correct #{path}"
+  print_line("-")
+  system "rspec"
+  print_line("-")
 end
