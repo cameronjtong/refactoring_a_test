@@ -1,4 +1,3 @@
-
 class LineItem
   attr_accessor :invoice, :product, :quantity, :percent_discount
 
