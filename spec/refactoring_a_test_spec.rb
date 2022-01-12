@@ -10,10 +10,8 @@ RSpec.describe RefactoringATest do
 
     item = LineItem.new(invoice, product, 10, 15)
 
-    expect(item.invoice).to eq(invoice)
-    expect(item.product).to eq(product)
-    expect(item.quantity).to eq(10)
-    expect(item.percent_discount).to eq(15)
+    expect(item).to have_attributes(invoice: invoice, product: product,
+                                    quantity: 10, percent_discount: 15)
   end
 
   it "add_item_quantity several quantity v1" do
