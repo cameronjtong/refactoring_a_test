@@ -21,24 +21,14 @@ RSpec.describe RefactoringATest do
   end
   context "#add_item_quantity" do
     it "adds an item to an invoice" do
-      billing_address = create_address
-
-      shipping_address = FactoryBot.create(
-        :address,
-        street: "1333 1st St SW",
-        city: "Calgary",
-        province: "Alberta",
-        postal_code: "T2N 2V2",
-        country: "Canada"
-      )
       customer = FactoryBot.create(
         :customer,
         number: 99,
         name: "John",
         last_name: "Doe",
         percent_discount: BigDecimal("30"),
-        billing_address: billing_address,
-        shipping_address: shipping_address
+        billing_address: create_address,
+        shipping_address: create_address
       )
       product = FactoryBot.create(:product, number: 88, code: "SomeWidget", unit_price: BigDecimal("19.99"))
       invoice = FactoryBot.create(:invoice, customer: customer)
