@@ -19,9 +19,9 @@ RSpec.describe RefactoringATest do
   end
   context "#add_item_quantity" do
     it "adds an item to an invoice" do
-      customer = FactoryBot.create(:customer, percent_discount: 30)
-      product = FactoryBot.create(:product)
-      invoice = FactoryBot.create(:invoice, customer: customer)
+      customer = create(:customer, percent_discount: 30)
+      product = create(:product)
+      invoice = create(:invoice, customer: customer)
 
       invoice.add_item_quantity(product, 5)
 
