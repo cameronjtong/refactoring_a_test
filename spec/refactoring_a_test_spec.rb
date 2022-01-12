@@ -45,22 +45,10 @@ context '#add_item_quantity' do
       product = FactoryBot.create(:product, number: 88, code: "SomeWidget", unit_price: BigDecimal("19.99"))
       invoice = FactoryBot.create(:invoice, customer: customer)
 
-      # Exercise  SUT
       invoice.add_item_quantity(product, 5)
 
-      # Verify  outcome
-      line_items = invoice.line_items
-      if line_items.size == 1
-        item = line_items[0]
-        expect(item.invoice).to eq(invoice)
-        expect(item.product).to eq(product)
-        expect(item.quantity).to eq(5)
-        expect(item.percent_discount).to eq(30)
-        expect(item.unit_price).to eq(BigDecimal("19.99"))
-        expect(item.extended_price).to eq(BigDecimal("69.97"))
-      else
-        expect(false).to eq(true)
-      end
+      expect(invoice.line_items).to contain_exactly(having_attributes(invoice: invoice, product: product,
+                                                                       quantity: 5, percent_discount: 30))
   end
 end
 end
