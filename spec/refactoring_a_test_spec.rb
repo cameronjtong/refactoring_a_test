@@ -1,7 +1,8 @@
 require "bigdecimal"
 
 RSpec.describe RefactoringATest do
-  it "initialize a line item" do
+  context '#initialize' do
+  it "creates a line item" do
     billing_address = Address.new("1222 1st St SW", "Calgary", "Alberta", "T2N 2V2","Canada")
     shipping_address = Address.new("1333 1st St SW", "Calgary", "Alberta", "T2N 2V2", "Canada")
     customer = Customer.new(99, "John", "Doe", BigDecimal("30"), billing_address, shipping_address)
@@ -13,8 +14,9 @@ RSpec.describe RefactoringATest do
     expect(item).to have_attributes(invoice: invoice, product: product,
                                     quantity: 10, percent_discount: 15)
   end
-
-  it "add_item_quantity several quantity v1" do
+end
+context '#add_item_quantity' do
+  it "adds an item to an invoice" do
       billing_address = FactoryBot.create(
         :address,
         street: "1222 1st St SW" ,
@@ -60,4 +62,5 @@ RSpec.describe RefactoringATest do
         expect(false).to eq(true)
       end
   end
+end
 end
