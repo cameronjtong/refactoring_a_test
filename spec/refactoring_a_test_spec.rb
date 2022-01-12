@@ -1,12 +1,6 @@
 require "bigdecimal"
 
 RSpec.describe RefactoringATest do
-  after(:each) do
-    DB.instance.all.each do |obj|
-      DB.delete(obj)
-    end
-  end
-
   it "initialize a line item" do
     billing_address = Address.new("1222 1st St SW", "Calgary", "Alberta", "T2N 2V2","Canada")
     shipping_address = Address.new("1333 1st St SW", "Calgary", "Alberta", "T2N 2V2", "Canada")
