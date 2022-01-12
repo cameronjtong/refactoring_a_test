@@ -1,9 +1,8 @@
 RSpec.describe RefactoringATest do
   context "#initialize" do
     it "creates a line item" do
-      customer = create(:customer, percent_discount: 15)
       product = create(:product)
-      invoice = create(:invoice, customer: customer)
+      invoice = create_invoice(customer: create_customer(percent_discount: 15))
 
       item = LineItem.new(invoice, product, 10, 15)
 
@@ -17,9 +16,8 @@ RSpec.describe RefactoringATest do
   end
   context "#add_item_quantity" do
     it "adds an item to an invoice" do
-      customer = create(:customer, percent_discount: 30)
       product = create(:product)
-      invoice = create(:invoice, customer: customer)
+      invoice = create_invoice(customer: create_customer(percent_discount: 30))
 
       invoice.add_item_quantity(product, 5)
 
@@ -32,5 +30,13 @@ RSpec.describe RefactoringATest do
         )
       )
     end
+  end
+
+  def create_invoice(customer:)
+    create(:invoice, customer: customer)
+  end
+
+  def create_customer(percent_discount:)
+    create(:customer, percent_discount: percent_discount)
   end
 end
