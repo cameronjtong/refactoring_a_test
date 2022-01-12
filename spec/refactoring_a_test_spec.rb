@@ -21,15 +21,7 @@ RSpec.describe RefactoringATest do
   end
   context "#add_item_quantity" do
     it "adds an item to an invoice" do
-      customer = FactoryBot.create(
-        :customer,
-        number: 99,
-        name: "John",
-        last_name: "Doe",
-        percent_discount: BigDecimal("30"),
-        billing_address: create_address,
-        shipping_address: create_address
-      )
+      customer = create_customer(percent_discount: BigDecimal("30"))
       product = FactoryBot.create(:product, number: 88, code: "SomeWidget", unit_price: BigDecimal("19.99"))
       invoice = FactoryBot.create(:invoice, customer: customer)
 
@@ -44,6 +36,10 @@ RSpec.describe RefactoringATest do
         )
       )
     end
+  end
+
+  def create_customer(percent_discount:)
+    FactoryBot.create(:customer, percent_discount: percent_discount)
   end
 
   def create_address
